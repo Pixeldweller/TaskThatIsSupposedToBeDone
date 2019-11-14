@@ -1,0 +1,35 @@
+<!-- Template -->
+<div class="content-head">
+    <h2>Projekt Details (ID #context['id']#)</h2>
+</div>
+<div class="content-body">
+    <form id="dataform">
+        <input type="text" id="id" name="id" value="#context['id']#" style="display:none;"disabled/>
+
+        <label for="title">Titel</label>
+        <input type="text" id="title" name="title" value="#context['title']#"disabled/>
+
+        <label for="desc">Beschreibung</label>
+        <textarea type="text" id="desc" name="desc" disabled>#context['desc']#</textarea>
+
+        <label for="component">Komponenten</label>
+        <select id="component" name="component" multiple disabled>
+            @var entry;@
+            @var loop;@
+            @for loop = 0; loop < context['component'].length; loop++@
+            @entry = context['component'][loop];@
+            <option value="#context['component'][loop]#">#context['component_name'][loop]#</option>
+            @endfor@
+        </select>
+    </form>
+</div>
+<div class="content-footer">
+    <h4>
+        <button id="idDetailBack">Zurück</button>
+        <button id="idDetailEdit">Bearbeiten</button>
+        <button id="idDelete">Löschen</button>
+    </h4>
+</div>
+
+
+<!-- EOF -->

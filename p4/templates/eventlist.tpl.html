@@ -1,0 +1,51 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Messeübersicht</h2>
+</div>
+<div class="content-body">
+
+
+    <h3>Suchfilter</h3>
+    <div class="">
+        <input type="text" id="myInput" onkeyup="APPUTIL.util_o.hideTableRowsNotContaining(this.value)" placeholder="Volltextsuche" @if APPUTIL.cookie_o.getCookie('role') == 'v'@ value="#APPUTIL.cookie_o.getCookie('vuser')#" @endif@>
+    </div>
+    <h3>Ergebnisse</h3>
+    <div class="container">
+        <table id='searchtable' class="table-list current">
+            <thead class="table-head">
+            <tr>
+                <th class="clickable"> Name</th>
+                <th> Tags</th>
+                <th class="clickable"> Veranstalter</th>
+                <th class="clickable"> Datum Beginn</th>
+                <th class="clickable"> Datum Ende</th>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+
+            @for loop = 0; loop < context['data'].length; loop++@
+            @let entry = context['data'][loop]@
+
+
+            <tr id="#entry['id']#">
+                <td>#entry['name']#</td>
+                <td>#entry['desc']#</td>
+                <td>#APPUTIL.util_o.getNameIdIn(context['organizer'],entry['organizerid'])#</td>
+                <td>#entry['startdate']#</td>
+                <td>#entry['enddate']#</td>
+
+            </tr>
+            @endfor@
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<div class="content-footer">
+    <section></section>
+</div>
+
+
+<!-- EOF -->

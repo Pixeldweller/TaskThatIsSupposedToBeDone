@@ -1,0 +1,41 @@
+<!--Template-Template-->
+@console.log(context);@
+@var employee = context;@
+<div class="content-head">
+    @if employee.id === undefined@
+    <h2>Mitarbeiter hinzufügen</h2>
+    @else@
+    <h2>Mitarbeiter bearbeiten: #employee.firstname# #employee.lastname#</h2>
+    @endif@
+</div>
+
+<div class="content-body">
+    <form id="dataform" class="page" id="employee-form">
+        <input type="text" id="id" name="id" defaultValue="#employee.id#" value="#employee.id#" style="display:none;"/>
+        <label for="firstnmae">Vorname</label>
+        <input type="text" id="firstnmae" name="firstname" defaultValue="#employee.firstname#" value="#employee.firstname#" required/>
+        <label for="lastname">Nachname</label>
+        <input type="text" id="lastname" name="lastname" defaultValue="#employee.lastname#" value="#employee.lastname#" required/>
+        <label for="roleid">Benutzerrolle</label>
+        <select name="roleid" id="roleid" defaultValue=#employee.roleId#>
+            @console.log(employee.roleId);@
+            @if employee.roleId == 0@
+            <option value="0" selected>Softwareentwickler</option>
+            <option value="1">Qualitätssicherungs-Mitarbeiter</option>
+            @else@
+            <option value="0">Softwareentwickler</option>
+            <option value="1"selected>Qualitätssicherungs-Mitarbeiter</option>
+            @endif@
+        </select>
+        <label for="username">Nutzername</label>
+        <input type="text" id="username" name="username" defaultValue="#employee.username#" value="#employee.username#" required/>
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" defaultValue="#employee.email#" value="#employee.email#" required/>
+    </form>
+</div>
+<div class="content-footer">
+    <button id="idEdit" data-action="save">Absenden</button>
+    <button id="idBack" data-action="cancel">Zurück</button>
+</div>
+
+<!--EOF-->

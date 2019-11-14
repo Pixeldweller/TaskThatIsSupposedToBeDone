@@ -1,0 +1,105 @@
+<!--Template-Template-->
+@let index;@
+@let secIndex;@
+@let error = context['bug'];@
+@if error === undefined@
+@error = []@
+@endif@
+@let categories = context['bug_category'];@
+@let cause = context['cause_category'];@
+@let employees = context['employee'];@
+@let projects = context['project'];@
+@let components = context['component'];@
+@let singleEntry;@
+@let secSingleEntry;@
+<div class="content-head">
+    <h2>Fehler Freigabe</h2>
+</div>
+<div class="content-body">
+    <form id="dataform">
+        <input type="text" id="id" name="id" defaultValue="#error['id']#" value="#error['id']#"
+               style="display:none;"/>
+
+        <label for="component">Komponente</label>
+        <select id="component" name="component" defaulValue="#error['component']#" disabled>
+            @for index = 0; index < projects.length; index++@
+            @singleEntry = projects[index];@
+            <optgroup label="#singleEntry.title#">
+                @for secIndex = 0; secIndex < singleEntry.component.length; secIndex++@
+                @secSingleEntry = singleEntry.component[secIndex]@
+
+                <option value="#secSingleEntry#">#components[secSingleEntry].name#</option>
+
+                @endfor@
+            </optgroup>
+            @endfor@
+        </select>
+        <label for="startdesc">Fehlerbeschreibung</label>
+        <textarea id="startdesc" name="startdesc" defaultValue="#error.startdesc#" disabled>#error.startdesc#</textarea>
+        <label for="bug_category">Fehler-Kategorien</label>
+        <select multiple id="bug_category" name="bug_category" disabled>
+            @for index = 0; index < categories.length; index++@
+            @singleEntry = categories[index];@
+            @if error['bug_category'] !== undefined @
+            @if error.bug_category.includes(singleEntry.id)@
+            <option value="#singleEntry.id#" selected>#singleEntry.title#</option>
+            @else@
+            <option value="#singleEntry.id#">#singleEntry.title#</option>
+            @endif@
+            @else@
+            <option value="#singleEntry.id#">#singleEntry.title#</option>
+            @endif@
+            @endfor@
+        </select>
+        <label for="qsemployee">QS-Mitarbeiter</label>
+        <select id="qsemployee" name="qsemployee" defaultValue="#error['qsemployee']#" disabled>
+            @for index = 0; index < employees.length; index++@
+            @singleEntry = employees[index];@
+            @if error.qsemployee === singleEntry.id && singleEntry.roleId == 1@
+            <option value="#singleEntry.id#" selected>#singleEntry.lastname#, #singleEntry.firstname#</option>
+            @else@
+            <option value="#singleEntry.id#">#singleEntry.lastname#, #singleEntry.firstname#</option>
+            @endif@
+            @endfor@
+        </select>
+
+        <label for="startdate">Erfassungsdatum</label>
+        <input id="startdate" type="date" name="startdate" defautlValue="#error['startdate']#"
+               value="#error['startdate']#" required disabled>
+        <br>
+        <hr>
+        <br>
+        <label for="swemployee">Software Entwickler</label>
+        <select id="swemployee" name="swemployee" defaultValue="#error['swemployee']#" disabled>
+            @for index = 0; index < employees.length; index++@
+            @singleEntry = employees[index];@
+            @if error.swemployee === singleEntry.id && singleEntry.roleId == 0@
+            <option value="#singleEntry.id#" selected>#singleEntry.lastname#, #singleEntry.firstname#</option>
+            @else@
+            <option value="#singleEntry.id#">#singleEntry.lastname#, #singleEntry.firstname#</option>
+            @endif@
+            @endfor@
+        </select>
+        <label for="enddate">Behebungssdatum</label>
+        <input id="enddate" type="date" name="startdate" defautlValue="#error['enddate']#" value="#error['enddate']#"
+               required disabled>
+        <label for="cause_category">Ursachen Kategorie</label>
+        <select id="cause_category" name="cause_category" disabled>
+            @for index = 0; index < cause.length; index++@
+            @singleEntry = cause[index];@
+            @if error.cause_category == singleEntry.id@
+            <option value="#singleEntry.id#" selected>#singleEntry.title#</option>
+            @else@
+
+            @endif@
+            @endfor@
+        </select>
+        <label for="enddesc">Behebungsbemerkung</label>
+        <textarea id="enddesc" name="enddesc" defaultValue="#error.causedesc#" disabled>#error.causedesc#</textarea>
+    </form>
+</div>
+<div class="content-footer">
+    <button id="idAblehnen">Lösung ablehnen</button>
+    <button id="idFreigeben">Lösung freigeben</button>
+</div>
+<!--EOF-->

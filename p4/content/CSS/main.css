@@ -1,0 +1,300 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #5769ff;
+    color: white;
+}
+
+aside {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 250px;
+    height: 300%;
+    background-color: lightgrey;
+    color: #5769ff;
+}
+
+main {
+    position: absolute;
+    top: 100px;
+    left: 250px;
+    right: 0;
+    bottom: 100px;
+}
+
+#nav {
+    margin: 0;
+    background-color: whitesmoke;
+    padding: 10px 10px 10px 0;
+    min-width: 15%;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#content {
+    margin: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.content-head {
+    order: 1;
+    width: 100%;
+    text-align: center;
+}
+
+.switch {
+    width: 20%;
+    margin: 2%;
+}
+
+.content-body {
+    order: 2;
+    overflow: auto;
+    padding-right: 2vh;
+    margin-top: 10px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+
+
+.content-footer {
+    order: 3;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+}
+
+footer, p {
+    text-align: center;
+}
+
+#alert-box, #feedback-box {
+    transition: all .2s ease-in-out;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border: 2px solid #ff5959;
+    background-color: #803939;
+    color: white;
+    padding: 10px;
+    border-radius: 16px;
+    z-index: 9000;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#alert-box:hover, #feedback-box:hover {
+    opacity: 0.9;
+}
+
+#alert-box {
+    border: 2px solid #ff5959;
+    background-color: #803939;
+}
+
+#feedback-box {
+    border: 2px solid #2e7799;
+    background-color: #66b0ab;
+}
+
+i.alert-success-button {
+    text-decoration: none;
+}
+
+i.alert-success-button:hover {
+    color: red;
+    cursor: pointer;
+}
+
+td, th {
+    padding: 15px;
+    text-align: left;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+table.table-list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+input, select {
+    padding: 12px 20px;
+    margin: 8px 0 0 60px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    width: 80%;
+}
+
+input:focus {
+    background-color: lightgoldenrodyellow;
+}
+
+label {
+    padding: 0 20px;
+    margin: 20px 0 0 60px;
+    display: block;
+}
+
+textarea {
+    width: 80%;
+    margin: 8px 0 0 60px;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+}
+
+li {
+    margin-top: 10%;
+}
+
+a {
+    color: #404040;
+    padding: 2px;
+    position: relative;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #f4fdff;
+}
+
+a:active {
+    box-shadow: none;
+    top: 5px;
+}
+
+.symbol {
+    height: 17px;
+    width: 10px;
+    background-color: #bbb;
+    display: inline-block;
+    position: absolute;
+    left: 3px;
+}
+
+.symbol-erfasst {
+    background-color: #d62b39;
+}
+
+.symbol-behoben {
+    background-color: #f2de00;
+}
+
+.symbol-freigegeben {
+    background-color: #19af1f;
+}
+
+.container {
+    background-color: #eeeeee;
+    border: 1px #ccc;
+    border-radius: 16px;
+    border-color: black;
+    margin-bottom: 10px;
+    min-height: 25px;
+    box-shadow: 0px 3px 23px -8px black;
+    padding: 10px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f7f7f7;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+table {
+    margin: 0px auto;
+    background-color: #eee;
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.roundTable {
+    border-collapse: separate;
+    border: solid black 1px;
+    border-radius: 10px;
+    background-color: black;
+    margin-bottom: 10px;
+    width: 65%;
+}
+
+th {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+.clSelected {
+    background-color: blue !important;
+    color: white;
+}
+
+/* The animation code */
+@keyframes example {
+    from {
+        background-color: #0044ff;
+    }
+    to {
+        background-color: #80a1ff;
+    }
+}
+
+/* The element to apply the animation to */
+header {
+    transition: all 1s;
+    animation-name: example;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* EOF */

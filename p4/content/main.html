@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>
+        Messeplaner V0.0
+    </title>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        @import url("/assets/css/main.css");
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="JS/engine/req.js"></script>
+    <script type="text/javascript" src="JS/engine/evs.js"></script>
+    <script type="text/javascript" src="JS/engine/tco.js"></script>
+    <script type="text/javascript" src="JS/engine/tmg.js"></script>
+    <script type="text/javascript" src="JS/bug.js"></script>
+    <script type="text/javascript" src="JS/sidebar.js"></script>
+    <script type="text/javascript" src="JS/list.js"></script>
+    <script type="text/javascript" src="JS/detail.js"></script>
+    <script type="text/javascript" src="JS/section.js"></script>
+    <script type="text/javascript" src="JS/main.js"></script>
+    <script type="text/javascript" src="JS/edit.js"></script>
+
+    <script type="text/javascript" src="JS/yolo.js"></script>
+</head>
+<body id="idBody">
+<div id="background"></div>
+<aside id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                <li><a href="#intro">Welcome</a></li>
+                <li><a href="#one">Who we are</a></li>
+                <li><a href="#two">What we do</a></li>
+                <li><a href="#three">Get in touch</a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<main id="wrapper"></main>
+
+<div id="alert-box" hidden onclick="document.querySelector('#alert-box').setAttribute('hidden','');">
+    <span id="alert-text"></span>
+    <i class="alert-success-button">X</i>
+</div>
+<div id="feedback-box" hidden onclick="document.querySelector('#feedback-box').setAttribute('hidden','');">
+    <span id="feedback-box-text"></span>
+    <i class="alert-success-button">X</i>
+</div>
+<div id='light'></div>
+
+
+</body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script>
+
+    setTimeout(function () {
+        var script = document.createElement('script');
+        script.src = "/assets/js/main.js";
+        document.getElementsByTagName('head')[0].appendChild(script);
+        document.getElementsByClassName('scrolly')[0].className = document.getElementsByClassName('scrolly ')[0].className + ' active';
+    }, 500);
+
+    const light = document.getElementById('light');
+    document.addEventListener('mousedragged', e => {
+        light.style.top = e.pageY + "px"
+        light.style.left = e.pageX + "px"
+    })
+
+</script>
+</html>

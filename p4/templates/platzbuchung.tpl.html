@@ -1,0 +1,43 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+@console.log(context);@
+@var vlist = context['all_exhibitors'];@
+@console.log(vlist);@
+@var event = context['event'];@
+
+<div id="buchungTool" class="floatingDiv"
+     style="width: #APPUTIL.cookie_o.getCookie('utilsize') == '' ? 650: APPUTIL.cookie_o.getCookie('utilsize')#px; max-width: 100%;margin-left: 30px; float: left; resize: both; overflow-x: auto; overflow-y: hidden;"
+     onmouseleave="APPUTIL.cookie_o.setCookie('utilsize',this.style.width.replace('px',''),1)">
+    <h4>Standreservierung</h4>
+    <div class='container dark' style="width: 100%; display:inline-table;">
+        <form id="dataform" class="page" id="event-form" title=#context['event'].id# name="#context['plan'].id#"
+              style="width: 95%; margin:auto; text-align: center;">
+            <label style="margin: 10px;" for="exhibitorid">Aussteller</label>
+            <select id="exhibitorid" name="exhibitorid" defaultValue="#event['organizerid']#">
+                @for index = 0; index < vlist.length; index++@
+                @singleEntry = vlist[index];@
+                @if APPUTIL.cookie_o.getCookie('auser') === singleEntry.name@
+                <option value="#singleEntry.id#" selected>#singleEntry.name#</option>
+                @else@
+                <option value="#singleEntry.id#">#singleEntry.name#</option>
+                @endif@
+                @endfor@
+            </select>
+            <label for="desc">Standbeschreibung</label>
+            <input type="text" id="desc" name="desc" defaultValue="#event.desc#" value="#event.desc#"
+                   placeholder="Typ des Stands..." required/>
+            <label for="pos">Standposition</label>
+            <input type="text" id="pos" name="pos" defaultValue="#event.pos#" value="#event.pos#"
+                   placeholder="--" disabled required style="width: 80px;margin: auto; text-align: center;"/>
+
+            <input type="button" value="Buchen" id="buchenButton" title="Zunächst Position anklicken!"
+                   style="margin-top:20px;"
+                   onclick="APPUTIL.util_o.updateBooking(0,0,document.getElementById('exhibitorid').value, document.getElementById('desc').value);"
+                   disabled>
+            </input>
+        </form>
+    </div>
+</div>
+
+<!-- EOF -->

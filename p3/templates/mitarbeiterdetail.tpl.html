@@ -1,0 +1,37 @@
+<!--Template-Template-->
+@console.log(context);@
+@var employee = context;@
+<div class="content-head">
+    <h2>Mitarbeiter Details (ID #employee.id#)</h2>
+</div>
+
+<div class="content-body">
+    <form id="dataform" class="page" id="employee-form">
+        <input type="text" id="id" name="id" value="#employee.id#" style="display:none;" disabled/>
+        <label for="firstnmae">Vorname</label>
+        <input type="text" id="firstnmae" name="firstname" value="#employee.firstname#" disabled/>
+        <label for="lastname">Nachname</label>
+        <input type="text" id="lastname" name="lastname" value="#employee.lastname#" disabled/>
+        <label for="roleid">Benutzerrolle</label>
+        <select name="roleid" id="roleid" disabled>
+            @if employee.roleId === 0@
+            <option value="0" selected>Softwareentwickler</option>
+            <option value="1">Qualitätssicherungs-Mitarbeiter</option>
+            @else@
+            <option value="0">Softwareentwickler</option>
+            <option value="1" selected>Qualitätssicherungs-Mitarbeiter</option>
+            @endif@
+        </select>
+        <label for="username">Nutzername</label>
+        <input type="text" id="username" name="username" value="#employee.username#" disabled/>
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" value="#employee.email#" disabled/>
+    </form>
+</div>
+<div class="content-footer">
+    <button id="idDetailBack">Zurück</button>
+    <button id="idDetailEdit">Bearbeiten</button>
+    <button id="idDelete">Löschen</button>
+</div>
+
+<!--EOF-->

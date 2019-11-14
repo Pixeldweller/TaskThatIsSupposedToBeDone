@@ -1,0 +1,9 @@
+figure, figure img {
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center; /* zur Zentrierung des img-Elements */
+   width: 15cm;
+}
+figcaption {
+   text-align: center;
+}

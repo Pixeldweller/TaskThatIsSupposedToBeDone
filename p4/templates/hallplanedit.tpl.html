@@ -1,0 +1,91 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+@console.log(context);@
+@let plan = context['layouts'][0];@
+@if plan == null@
+KEIN HALLENLAYOUT GEFUNDEN
+@else@
+@let marks = ['A','B','C','D','E','F','G','H','I','J','K']@
+<div style="width: 650px; max-width: 100%;  float: left; resize: horizontal; overflow-x: auto; overflow-y: hidden;">
+    <h4>Hallenplan-Layout zur Veranstaltung #context['event']['name']# auswählen:</h4>
+    <div class='container theme-6' style="width: 100%; display:inline-block;">
+        <div class='mask top'></div>
+        <div class='mask left'></div>
+        <div class='content'>
+            <div class='cal' style="grid-template-columns: repeat(#plan.w#, 1fr);">
+                @for loop_h = 0; loop_h < plan.h; loop_h++@
+                @for loop_w = 0; loop_w < plan.w; loop_w++@
+                @if APPUTIL.util_o.getBookingEntryValue(plan['bookings'],loop_w, loop_h,"bookingtype") == '0'@
+                <div class='field' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: whitesmoke; background-color: whitesmoke;"><div>.</div>
+                </div>
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(plan['bookings'],loop_w, loop_h,"bookingtype") == '1'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: yellow; background-color: yellow;">WC
+                </div>
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(plan['bookings'],loop_w, loop_h,"bookingtype") == '2'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: darkred; background-color: darkred;">
+                    <div class="iconimg"></div>
+                </div>
+                @else@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#" style="color: ##00000042;">
+                    #marks[loop_h]##loop_w#
+                </div>
+                @endif@
+                @endif@
+                @endif@
+                @endfor@
+                @endfor@
+            </div>
+        </div>
+    </div>
+    <div class='mask right'></div>
+    <div class='mask bottom'></div>
+</div>
+
+<div style="width: 515px; max-width: 49%; float: left; margin: 30px; float: left; resize: horizontal; overflow-x: auto; overflow-y: hidden;">
+    <div class='container dark'>
+        <h5>Hallenlayout bestimmen</h5>
+        <label for="layout_id">Breite</label>
+        <select tabindex="0" id="layout_id" style="display: inline;"
+                onchange="APPUTIL.es_o.publish_px('app.cmd', ['section', 'event', #context['event'].id#]);">
+            <option value="0" @if plan.layout== 0@ selected @endif@>Rundgang + Ausgänge</option>
+            <option value="1" @if plan.layout== 1@ selected @endif@>Kreuz</option>
+            <option value="2" @if plan.layout== 2@ selected @endif@>Rundgang + Kreuz</option>
+            <option value="3" @if plan.layout== 3@ selected @endif@>Leiterlayout</option>
+        </select>
+        <label for="dimension_x">Breite</label>
+        <select tabindex="0"  id="dimension_x" style="display: inline;"
+                onchange="APPUTIL.es_o.publish_px('app.cmd', ['section', 'event', #context['event'].id#]);">
+            @for loop = 3; loop < 9; loop++@
+            @if loop == plan.w@
+            <option selected>#loop#</option>
+            @else@
+            <option>#loop#</option>
+            @endif@
+            @endfor@
+
+        </select>
+        <label for="dimension_x">Höhe</label>
+        <select tabindex="0" id="dimension_y" style="display: inline;"
+                onchange="APPUTIL.es_o.publish_px('app.cmd', ['section', 'event', #context['event'].id#]);">
+            @for loop = 3; loop < 9; loop++@
+            @if loop == plan.h@
+            <option selected>#loop#</option>
+            @else@
+            <option>#loop#</option>
+            @endif@
+            @endfor@
+        </select>
+    </div>
+
+    <button id="idSavePlan" onclick="APPUTIL.es_o.publish_px('app.cmd', ['section', 'event', #context['event'].id#, 'hallplan']);">Speichern</button>
+
+</div>
+@endif@
+
+<!-- EOF -->

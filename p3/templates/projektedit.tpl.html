@@ -1,0 +1,42 @@
+<!-- Template -->
+@if context['id'] === undefined@
+@context['component'] = []@
+@endif@
+
+<div class="content-head">
+    @if context['id'] !== undefined@
+    <h2>Projekt Bearbeiten (ID #context['id']#)</h2>
+    @else@
+    <h2>Neues Projekt anlegen</h2>
+    @endif@
+</div>
+<div class="content-body">
+    <form id="dataform">
+        <input type="text" id="id" name="id" defaultValue="#context['id']#" value="#context['id']#" style="display:none;"/>
+
+        <label for="title">Titel</label>
+        <input type="text" id="title" name="title" defaultValue="#context['title']#" value="#context['title']#"/>
+
+        <label for="desc">Beschreibung</label>
+        <textarea type="text" id="desc" defaultText="#context['desc']#" name="desc">#context['desc']#</textarea>
+
+        <label for="component">Komponenten</label>
+        <select id="component" name="component" multiple disabled>
+            @var entry;@
+            @var loop;@
+            @for loop = 0; loop < context['component'].length; loop++@
+            @entry = context['component'][loop];@
+            <option value="#context['component'][loop]#">#context['component_name'][loop]#</option>
+            @endfor@
+        </select>
+    </form>
+</div>
+<div class="content-footer">
+    <h4>
+        <button id="idBack">Zurück</button>
+        <button id="idEdit">Übernehmen</button>
+    </h4>
+</div>
+
+
+<!-- EOF -->

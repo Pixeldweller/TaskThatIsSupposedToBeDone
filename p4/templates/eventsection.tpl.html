@@ -1,0 +1,114 @@
+@console.log(context);@
+@let plan = context['plan'];@
+@let marks = ['A','B','C','D','E','F','G','H','I','J','K']@
+<div class="floatingDiv"
+     style="width: #APPUTIL.cookie_o.getCookie('plansize') == '' ? 600: APPUTIL.cookie_o.getCookie('plansize')#px; max-width: 100%;  float: left; resize: both; overflow-x: auto; overflow-y: hidden;"
+     onmouseleave="APPUTIL.cookie_o.setCookie('plansize',this.style.width.replace('px',''),1)">
+    <h4>Hallenplan zur Veranstaltung: #context['event']['name']#</h4>
+    <div class='container theme-6' style="width: 100%; display:inline-block;">
+        <div class='mask top'></div>
+        <div class='mask left'></div>
+        <div class='content'>
+            <div class='cal' style="grid-template-columns: repeat(#plan.w#, 1fr);">
+                @for loop_h = 0; loop_h < plan.h; loop_h++@
+                @for loop_w = 0; loop_w < plan.w; loop_w++@
+                @if APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w, loop_h,"bookingtype") == '4'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#" title="#APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w,
+                    loop_h,'desc')#" onmouseover="APPUTIL.util_o.highlightBooking(this.title);">
+                    #marks[loop_h]##loop_w#
+                </div>
+
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w, loop_h,"bookingtype") == '1'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: yellow; background-color: yellow;">WC
+                </div>
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w, loop_h,"bookingtype") == '2'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: darkred; background-color: darkred;">
+                    <div class="iconimg"></div>
+                </div>
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w, loop_h,"bookingtype") == '0'@
+                <div class='field' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: whitesmoke; background-color: whitesmoke;">
+                    @if loop_w == 0@
+                    <i class="fa fa-arrow-right"></i>
+                    @else@
+                        @if loop_w == plan.w-1@
+                        <i class="fa fa-arrow-left"></i>
+                        @else@
+                            @if loop_h == plan.h-1@
+                            <i class="fa fa-arrow-up"></i>
+                            @else@
+                                @if loop_h == 0@
+                                <i class="fa fa-arrow-down"></i>
+                                @else@
+
+                                @endif@
+                            @endif@
+                        @endif@
+                    @endif@
+                </div>
+                @else@
+                @if APPUTIL.util_o.getBookingEntryValue(context['bookings'],loop_w, loop_h,"bookingtype") == '3'@
+                <div class='day' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="background: darkgreen; background-color: darkgreen;"><i>Büro</i>
+                </div>
+                @else@
+                <div class='field' tabindex='0' y="#loop_h#" x="#loop_w#"
+                     style="color: ##00000042;">-
+                </div>
+                @endif@
+                @endif@
+                @endif@
+                @endif@
+                @endif@
+                @endfor@
+                @endfor@
+            </div>
+        </div>
+    </div>
+    <div class='mask right'></div>
+    <div class='mask bottom'></div>
+</div>
+
+<div class="floatingDiv"
+     style="width: 515px; max-width: 100%; float: left; margin-left: 30px; float: left; resize: both; overflow-x: auto; overflow-y: hidden;">
+    <h4>Aussteller Übersicht</h4>
+    <div class='container' style="height: 100%; width: 100%; display:inline-table;">
+        <table class="table-list">
+            <thead class="table-head">
+            <tr>
+                <th class="clickable"> Standnummer</th>
+                <th class="clickable"> Aussteller</th>
+                <th class="clickable"> Standbeschreibung</th>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+            @for loop = 0; loop < context['bookings'].length; loop++@
+            @let entry = context['bookings'][loop]@
+
+            @if entry.desc != 'Veranstalter'@
+            <tr class="info" id='-1'
+                title="#entry.desc#"
+                onmouseover="APPUTIL.util_o.highlightBooking(this.title);">
+                <td>
+                    #marks[entry.y]##entry.x#
+                </td>
+                <td>
+                    #APPUTIL.util_o.getBookingEntryTargetValue(context['all_exhibitors'],"id",entry['exhibitorid'],'name')#
+                </td>
+                <td>#entry.desc#</td>
+            </tr>
+            @else@
+            @endif@
+            @endfor@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- EOF -->

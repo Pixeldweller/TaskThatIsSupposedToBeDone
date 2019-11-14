@@ -1,0 +1,35 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Auswertung Fehler-Kategorien / Fehler </h2>
+</div>
+<div class="content-body">
+    <table id="list" class="table-list current">
+        <thead class="table-head">
+            <tr>
+                <th class="clickable"> Fehlerkategorie</th>
+                <th class="clickable"> Fehlerbeschreibung</th>
+                <th class="clickable"> Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+        @var entry;@
+        @var loop;@
+        @for loop = 0; loop < context.length; loop++@
+        @entry = context[loop];@
+            <tr>
+                <td>#entry['category']#</td>
+                <td>#entry['bug']#</td>
+                <td>#entry['status']#</td>
+            </tr>
+        @endfor@
+        </tbody>
+    </table>
+</div>
+<div class="content-footer">
+    <h4>
+        Diese Auswertung wurde am ... erstellt
+    </h4>
+</div>
+
+<!-- EOF -->

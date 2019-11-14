@@ -1,0 +1,266 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        figure, img {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center; /* zur Zentrierung des img-Elements */
+            width: 15cm;
+        }
+
+        img + em {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<h1 id="interaktivesystemepraktikum">Interaktive Systeme Praktikum</h1>
+
+<h2 id="aufgabenstellungmessehallenplaner">Aufgabenstellung: Messehallenplaner</h2>
+
+<h2 id="1einleitungallgemeinebeschreibungderaufgabenstellung">1. Einleitung: allgemeine Beschreibung der Aufgabenstellung</h2>
+
+<p>Es soll ein Prototyp einer Weblösung für die Bereitstellung einer Messehallenorganisationsanwendung erstellt werden.
+<strong>Messeveranstalter</strong>, <strong>Aussteller</strong> und <strong>Besucher</strong> sollen dort auf Messehalleninformationen zugreifen können.
+Sodass Messeveranstalter Ausstellungsflächen anbieten können und Austeller selbstständig ihren Stand dort anmelden können.
+Außerdem erhalten Messebesucher die Möglichkeit sich die aktuellen Messen inklusive Hallenplan angeben zu lassen.</p>
+
+<h3 id="dokumentationsstand">Dokumentationsstand</h3>
+
+<p>Die Dokumentation wurde am 17.05.19 erstellt.</p>
+
+<h3 id="aufbau">Aufbau</h3>
+
+<p>Für eine mehrzahl von Interaktionen wird ein 3 Komponenten Aufbau mit entsprechenden Hierachie Ebenen genutzt. Eine Navigation, eine Listenansicht und eine Detailansicht bzw. Bearbeitungsansicht
+ werden gleichzeitig innerhalb einer Seite vorhanden sein und über Events mit einander Kommunizieren.</p>
+
+<p><img src="./core/grob.png" alt="" />
+<em>Desktop Ansicht</em></p>
+
+<p><img src="./core/mobile.png" alt="" />
+<em>Mobile Ansicht</em></p>
+
+<h5 id="zustandsdiagramm">Zustandsdiagramm</h5>
+
+<p><img src="./core/activity.png" alt="" /></p>
+
+<h2 id="2nutzungsszenariomesseveranstaler">2. Nutzungsszenario "Messeveranstaler"</h2>
+
+<h3 id="21allgemeinebeschreibung">2.1 Allgemeine Beschreibung</h3>
+
+<p>Der Messeveranstalter soll die Möglichkeit haben seine Messen inklusive Hallenauslegung der Standorte im Messehallenplaner einzupflegen.</p>
+
+<h3 id="22benutzergruppemesseveranstalerbeschreibungpersona">2.2 Benutzergruppe "Messeveranstaler": Beschreibung Persona</h3>
+
+<p>Der Veranstalter einer Messe möchte möglichst mit wenig Aufwand seine verfügbaren Messestände den Ausstellern kommunizieren.
+Außerdem will er entsprechend der Sicherheitsbestimmungen und Messeveranstaltungsauflagen eine passende Hallenaufteilung haben,
+ damit die Messe reibunglos stattfinden kann.</p>
+
+<h3 id="23interaktionsdesign">2.3 Interaktionsdesign</h3>
+
+<h3 id="231bersichtinteraktionen">2.3.1 Übersicht Interaktionen</h3>
+
+<ul>
+<li>Anlegen einer Messeveranstaltung</li>
+
+<li>Übersicht der eigenen Messen</li>
+
+<li>Übersicht der angemeldeten Ausstellern + Hallenplan Bearbeitung</li>
+</ul>
+
+<h3 id="232anlegeneinermesseveranstaltung">2.3.2 Anlegen einer Messeveranstaltung</h3>
+
+<h4 id="ablaufdiagramm">Ablaufdiagramm</h4>
+
+<p><img src="./host/messe_erstellung.png" alt="" /></p>
+
+<h4 id="wireframes">Wireframes</h4>
+
+<p><img src="./host/daten_erfassung.png" alt="" />
+<img src="./host/auswahl_aufteilung.png" alt="" />
+<img src="./host/freigabe.png" alt="" /></p>
+
+<h4 id="erluterungen">Erläuterungen</h4>
+
+<h6 id="bentigteangaben">Benötigte Angaben:</h6>
+
+<ul>
+<li>Veranstaltungsname</li>
+
+<li>Hallen-Typ (Typenliste von Server bereitgestellt)</li>
+
+<li>Kurz Bezeichnung</li>
+
+<li>Datum</li>
+</ul>
+
+<h6 id="bentigteauswahl">Benötigte Auswahl:</h6>
+
+<ul>
+<li>Auswahl der Hallenaufteilung (Auswahl zwischen verschiedenen vorgeschlagenen Varianten der Hallenauteilung)</li>
+
+<li>Auswahl für die Anmeldung gesperrte Flächen:
+
+
+<ul>
+<li>(Bei der Sperrung der Flächen können in einem Dropdown-Menü Symbole ausgewählt werden für den Grund der Sperrung)</li></ul>
+</li>
+</ul>
+
+<h6 id="erluterungsperrungsgrund">Erläuterung Sperrungsgrund:</h6>
+
+<p>Bei der Sperrung einer Fläche sind folgende Sperrungsgründe möglich:</p>
+
+<ul>
+<li>Toiletten</li>
+
+<li>Restaurant</li>
+
+<li>Büro des Hallenmeisters</li>
+</ul>
+
+<h6 id="bespielhallenaufteilungen">Bespiel Hallenaufteilungen:</h6>
+
+<p><img src="./host/hallenaufteilung_01.png" alt="" />
+<img src="./host/hallenaufteilung_02.png" alt="" /></p>
+
+<h3 id="233bersichtdereigenenmessen">2.3.3 Übersicht der eigenen Messen</h3>
+
+<h4 id="wireframes-1">Wireframes</h4>
+
+<p><img src="./host/bersicht.png" alt="" /></p>
+
+<h4 id="erluterungen-1">Erläuterungen</h4>
+
+<p>Hier kann innerhalb einer Liste eine Messe ausgewählt werden (per Klick) und eine <strong>Übersicht der Anmeldungen + Hallenplan</strong> erhalten werden.
+Auserdem existiert eine volltext Suche um angezeigte Messen filtern zu können.</p>
+
+<h6 id="volltextsuche">Volltext Suche:</h6>
+
+<ul>
+<li>Textsuche über alle angezeigten Tabellenfelder</li>
+</ul>
+
+<h3 id="234bersichtderangemeldetenausstellernhallenplanbearbeitung">2.3.4 Übersicht der angemeldeten Ausstellern + Hallenplan Bearbeitung</h3>
+
+<h4 id="wireframes-2">Wireframes</h4>
+
+<p><img src="./host/bearbeitung_messe.png" alt="" /></p>
+
+<h4 id="erluterungen-2">Erläuterungen</h4>
+
+<p>In dieser Ansicht können zusätzlich freie Hallenflächen gesperrt werden, Anmeldungen bearbeitet
+und gesperrte Flächen wieder freigegeben werden.</p>
+
+<h6 id="bearbeitung">Bearbeitung:</h6>
+
+<ul>
+<li>Die Bearbeitung erfolgt über Schaltflächen innerhalb des Hallenplans</li>
+</ul>
+
+<h2 id="3nutzungsszenarioaussteller">3. Nutzungsszenario "Aussteller"</h2>
+
+<h3 id="31allgemeinebeschreibung">3.1 Allgemeine Beschreibung</h3>
+
+<p>Der Aussteller soll die Möglichkeit haben eine Übersicht der stattfindenen Messen zu erhalten
+und in welcher er dann selbstständig über eine interaktive Hallenplanansicht einen freien Ausstellungstand anmelden kann. </p>
+
+<h3 id="32benutzergruppeausstellerbeschreibungpersona">3.2 Benutzergruppe "Aussteller": Beschreibung Persona</h3>
+
+<p>Der Aussteller möchte über anstehende Messeveranstaltungen mit freien Austellungständen informiert werden.
+Außerdem will er die Anmeldung möglichst einfach durchführen ohne zu viel Informationen angeben zu müssen bzw. mehrfach bei weiteren Messe Anmeldungen.
+Der Austeller sollte einmalig Informationen zu seiner Organisation angeben müssen.</p>
+
+<h3 id="33interaktionsdesign">3.3 Interaktionsdesign</h3>
+
+<h3 id="331bersichtinteraktionen">3.3.1 Übersicht Interaktionen</h3>
+
+<ul>
+<li>Übersicht / Suche von Messen mit verfügbaren Austellungsständen</li>
+
+<li>Auswahl eines Austellungsstands + Anmeldung an Messe</li>
+</ul>
+
+<h3 id="332bersichtsuchevonmessenmitverfgbarenaustellungsstnden">3.3.2 Übersicht / Suche von Messen mit verfügbaren Austellungsständen</h3>
+
+<h4 id="wireframe">Wireframe</h4>
+
+<p><img src="./presenter/Austeller_Messe_Ansicht.png" alt="" /></p>
+
+<h4 id="erluterungen-3">Erläuterungen</h4>
+
+<p>Es wird eine Liste mit anstehenden Messen mit verfügbaren Messeständen angezeigt. Einzelne Messen können per Klick gewählt werden.
+Daraufhin wird eine Hallenplan-Ansicht geöffnet. Auserdem existiert eine volltext Suche um angezeigte Messen filtern zu können.</p>
+
+<h6 id="volltextsuche-1">Volltext Suche:</h6>
+
+<ul>
+<li>Textsuche über alle angezeigten Tabellenfelder</li>
+</ul>
+
+<h3 id="333auswahleinesaustellungsstandsanmeldunganmesse">3.3.3 Auswahl eines Austellungsstands + Anmeldung an Messe</h3>
+
+<h4 id="wireframe-1">Wireframe</h4>
+
+<p><img src="./presenter/Austeller_Messe_Ansicht_Anmeldung.png" alt="" /></p>
+
+<h4 id="erluterungen-4">Erläuterungen</h4>
+
+<p>Diese Ansicht wird and die Messeübersichts Seite angehangen. Hier kann eine noch freie Fläche im Hallenplan selektiert werden.
+Sobald diese selektiert wird, werden Eingabemasken für die Anmeldung freigeschaltet. Sollte bei der ausgewählten Messe bereits ein Platz gebucht sein,
+wird anstatt der Anmeldungsoption eine <strong>Stornierungs</strong>-Option angeboten.</p>
+
+<h6 id="bentigteangaben-1">Benötigte Angaben:</h6>
+
+<ul>
+<li>Austellername</li>
+
+<li>Beschreibung des Stands</li>
+</ul>
+
+<h2 id="4nutzungsszenariobesucher">4. Nutzungsszenario "Besucher"</h2>
+
+<h3 id="41allgemeinebeschreibung">4.1 Allgemeine Beschreibung</h3>
+
+<p>Besucher sollen über anstehende Messen Hallenpläne samt Austeller Buchungen einsehen können.</p>
+
+<h3 id="42benutzergruppebesucherbeschreibungpersona">4.2 Benutzergruppe "Besucher": Beschreibung Persona</h3>
+
+<p>Besucher haben hauptsächlich den Wunsch für eine Messe eine schnelle und einfache Übersicht über die Austeller und dessen
+ Standpositionen einer Messe zu erfahren, um diese dann tatsächlich auch dort auffinden zu können.</p>
+
+<h3 id="43interaktionsdesign">4.3 Interaktionsdesign</h3>
+
+<h3 id="431bersichtinteraktionen">4.3.1 Übersicht Interaktionen</h3>
+
+<ul>
+<li>Übersicht / Suche zu stattfindenden Messen</li>
+
+<li>Hallen-/Austellerplan Übersicht</li>
+</ul>
+
+<h3 id="432bersichtsuchezustattfindendenmessen">4.3.2  Übersicht / Suche zu stattfindenden Messen</h3>
+
+<h4 id="wireframe-2">Wireframe</h4>
+
+<p><img src="./visitor/Besucher_Messe_Suche.png" alt="" /></p>
+
+<h4 id="erluterungen-5">Erläuterungen</h4>
+
+<p>Dem Bseucher wird eine Liste mit anstehenden Messen angezeigt. Diese kann er über eine Filtermaske auf bestimmte Messeangaben und Aussteller filtern.
+Wenn ein Messe Element ausgewählt wird, erscheint eine <strong>Hallenplan Ansicht</strong> mit insprechender Austeller Information.</p>
+
+<h3 id="433hallenausstellerplanbersicht">4.3.3  Hallen- / Ausstellerplan Übersicht</h3>
+
+<h4 id="wireframe-3">Wireframe</h4>
+
+<p><img src="./visitor/Besucher_Messe_Ansicht.png" alt="" /></p>
+
+<h4 id="erluterungen-6">Erläuterungen</h4>
+
+<p>Es wird entsprechend der ausgewählten Messeveranstaltung der Hallenplan mit bereits existierenden Anmeldungen, eine Legende dazu und die entsprechenden Austeller mit Platz-Nr. angezeigt.
+<em>Sollte bei der Suche ein Austeller ausgewählt sein</em>, wird dieser im Hallenplan besonders markiert und in der Austellerübersicht hervorgehoben.</p>
+</body>
+</html>

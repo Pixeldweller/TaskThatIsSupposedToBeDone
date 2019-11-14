@@ -1,0 +1,48 @@
+<!-- Template -->
+<!-- Navigationsbereich -->
+<div>
+    <img src="label_2.png" style="text-align: right;"/>
+</div>
+
+<div class="inner">
+    <nav>
+        @var role = APPUTIL.cookie_o.getCookie('role');@
+        <select tabindex="0" style="text-align: center"
+                onchange="APPUTIL.cookie_o.setCookie('role',this.value,1); location.reload();">
+            @if role == 'b'@
+            <option value="b" selected>Besucher</option>
+            <option value="a">Aussteller</option>
+            <option value="v">Veranstalter</option>
+            @else@
+            @if role == 'a'@
+            <option value="b">Besucher</option>
+            <option value="a" selected>Aussteller</option>
+            <option value="v">Veranstalter</option>
+            @else@
+            <option value="b">Besucher</option>
+            <option value="a">Aussteller</option>
+            <option value="v" selected>Veranstalter</option>
+            @endif@
+            @endif@
+        </select>
+        <ul>
+            @var entry_a;@
+            @var loop_i;@
+            @for loop_i = 0; loop_i < context.length; loop_i++@
+            @entry_a = context[loop_i];@
+            <li><a tabindex="0" class="scrolly active-locked" href="##" data-action="#entry_a[0]#">#entry_a[1]#</a></li>
+            @endfor@
+        </ul>
+    </nav>
+
+    <div class="userinfo" id="currentLogin" style="margin: 10px;">
+        <i class="fa fa-user" style="font-size:60px;"></i>
+        <i>Eingeloggt als <i id="currentUser">#APPUTIL.cookie_o.getCookie(APPUTIL.cookie_o.getCookie('role') + 'user')#</i></i>
+        <br>
+        <br>
+        <a onclick="APPUTIL.es_o.publish_px('login.cmd', []);">Ändern</a>
+    </div>
+</div>
+
+
+<!-- EOF -->

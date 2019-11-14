@@ -1,0 +1,47 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Ausstellerübersicht</h2>
+</div>
+<div class="content-body">
+
+
+    <h3>Suchfilter</h3>
+    <div class="">
+        <input type="text" id="myInput" onkeyup="APPUTIL.util_o.hideTableRowsNotContaining(this.value)"
+               placeholder="Volltextsuche">
+    </div>
+    <h3>Ergebnisse</h3>
+    <div class="container">
+        <table id='searchtable' class="table-list current">
+            <thead class="table-head">
+            <tr>
+                <th class="clickable"> Name</th>
+                <th class="clickable"> Beschreibung</th>
+                <th class="clickable"> An Messen anwesend...</th>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+
+            @console.log(context);@
+            @for loop = 0; loop < context['data'].length; loop++@
+            @let entry = context['data'][loop]@
+            @let eventid = APPUTIL.util_o.getBookingEntryTargetValues(context['bookings'], 'exhibitorid', entry.id,'eventid');@
+            <tr id="#entry['desc']#" title="#eventid#">
+                <td>#entry['name']#</td>
+                <td>#entry['desc']#</td>
+                <td>#APPUTIL.util_o.getAllNamesWithIdIn(context['events'],eventid)#</td>
+            </tr>
+            @endfor@
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<div class="content-footer">
+    <section></section>
+</div>
+
+
+<!-- EOF -->

@@ -1,0 +1,56 @@
+<!--Template-Employee-->
+<div class="content-head">
+    <h2>Mitarbeiterübersicht</h2>
+    <select id="switch" class="switch" onchange="APPUTIL.es_o.publish_px('app.cmd', ['mitarbeiter_type', this.value]);">
+        @if context['show'] == undefined@
+        <option value="-1" selected>Alle Mitarbeiter</option>
+        <option value="0">Alle Softwareentwickler</option>
+        <option value="1">Alle Qualitätssicherungs-Mitarbeiter</option>
+        @else@
+            @if context['show'] == 0@
+            <option value="-1">Alle Mitarbeiter</option>
+            <option value="0" selected>Alle Softwareentwickler</option>
+            <option value="1">Alle Qualitätssicherungs-Mitarbeiter</option>
+            @else@
+            <option value="-1">Alle Mitarbeiter</option>
+            <option value="0">Alle Softwareentwickler</option>
+            <option value="1" selected>Alle Qualitätssicherungs-Mitarbeiter</option>
+            @endif@
+        @endif@
+    </select>
+</div>
+<div class="content-body">
+    <table id="list" class="table-list current">
+        <thead class="table-head">
+            <tr>
+                <th class="clickable">Benutzername</th>
+                <th class="clickable">Name</th>
+                <th class="clickable">Vorname</th>
+                <th class="clickable">Rolle</th>
+                <th class="clickable">E-Mail</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+        @let index;@
+        @let employee;@
+        @let data = context['data'];@
+        @for index = 0; index < data.length; index++@
+        @employee = data[index]@
+        <tr id="#employee.id#">
+            <td>#employee.username#</td>
+            <td>#employee.lastname#</td>
+            <td>#employee.firstname#</td>
+            <td class="roleDef">#context['roles'][employee.roleId]['title']#</td>
+            <td>#employee.email#</td>
+        </tr>
+        @endfor@
+        </tbody>
+    </table>
+</div>
+<div class="content-footer">
+    <button value="listView" id="idShowListEntry" class="button needsSelection" disabled>Details</button>
+    <button value="listView" id="idEditEntry" class="button needsSelection" disabled>Bearbeiten</button>
+    <button value="listView" id="idDeleteEntry" class="button needsSelection" disabled>Löschen</button>
+    <button value="listView" id="idAddEntry">Neuen Benutzer anlegen</button>
+</div>
+<!--EOF-->

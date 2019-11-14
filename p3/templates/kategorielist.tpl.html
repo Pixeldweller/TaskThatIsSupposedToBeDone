@@ -1,0 +1,64 @@
+<!--Template-Template-->
+<div class="content-head">
+    <h2>Kategorienübersicht</h2>
+</div>
+<div class="content-body">
+    <h3>Fehlerkategorien</h3>
+    <table id="list_0" class="table-list">
+        <thead class="table-head">
+        <tr>
+            <th class="clickable">ID</th>
+            <th class="clickable">Bezeichnung</th>
+        </tr>
+        </thead>
+        <tbody class="table-body">
+        @let index;@
+        @let category;@
+        @console.log(context);@
+        @bug_cat = context['bug'];@
+        @for index = 0; index < bug_cat.length; index++@
+        @category = bug_cat[index]@
+        <tr data-roleid="#category.id#" id="bug-#category.id#">
+            <td>#category.id#</td>
+            <td>#category.title#</td>
+        </tr>
+        @endfor@
+        </tbody>
+
+    </table>
+    <h3>Ursachen-Kategorien</h3>
+    <table id="list_1" class="table-list">
+        <thead class="table-head">
+        <tr>
+            <th class="clickable">ID</th>
+            <th class="clickable">Bezeichnung</th>
+        </tr>
+        </thead>
+        <tbody class="table-body">
+        @cause_cat = context['cause'];@
+        @for index = 0; index < cause_cat.length; index++@
+        @category = cause_cat[index]@
+        <tr data-roleid="#category.id#" id="cause-#category.id#">
+            <td>#category.id#</td>
+            <td>#category.title#</td>
+        </tr>
+        @endfor@
+        </tbody>
+
+        </tfoot>
+    </table>
+</div>
+<div class="content-footer">
+    <button value="listView" id="idEditEntry" class="button needsSelection" disabled>Bearbeiten</button>
+    <button value="listView" id="idDeleteEntry" class="button needsSelection" disabled>Löschen</button>
+    <button value="listView" id="idAddBugEntry"
+            onclick="APPUTIL.es_o.publish_px('app.cmd', ['edit', 'kategorie', -1,'katfehler']);">Neue Fehlerkategorie
+        ...
+    </button>
+    <button value="listView" id="idAddCauseEntry"
+            onclick="APPUTIL.es_o.publish_px('app.cmd', ['edit', 'kategorie', -1,'katursache']);">Neue
+        Ursachen-Kategorie ...
+    </button>
+
+</div>
+<!--EOF-->

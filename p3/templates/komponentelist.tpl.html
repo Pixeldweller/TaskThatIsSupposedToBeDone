@@ -1,0 +1,69 @@
+<!--Template-Template-->
+<div class="content-head">
+    <h2>Komponentenübersicht</h2>
+</div>
+<div class="content-body">
+    <select class="switch" onchange="APPUTIL.es_o.publish_px('app.cmd', ['komponente_type', this.value]);">
+        <option value="-1" selected>Alle Komponenten</option>
+        @let index;@
+        @let projects = context['projects'];@
+        @let components = context['data']@
+        @let component;@
+        @let project;@
+        @let shownProject = -1;@
+        @if context['data'].length > 0@
+        @shownProject = context['data'][0].project;@
+        @endif@
+        @for index = 0; index < components.length; index++@
+        @if components[index].project != shownProject@
+        @shownProject = -1;@
+        @endif@
+        @endfor@
+        @for index = 0; index < projects.length; index++@
+        @project = projects[index]@
+        @if project.id == shownProject@
+        <option value="#project.id#" selected>Projekt #project.title#</option>
+        @else@
+        <option value="#project.id#">Projekt #project.title#</option>
+        @endif@
+        @endfor@
+    </select>
+
+    <!--All-Components-->
+    <table id="list" class="table-list" data-tableid="0">
+        <thead class="table-head">
+        <tr>
+            <th class="clickable">ID</th>
+            <th class="clickable">Name</th>
+            <th class="clickable">Beschreibung</th>
+            <th class="clickable">Projekt</th>
+        </tr>
+        </thead>
+        <tbody class="table-body">
+
+        @for index = 0; index < components.length; index++@
+        @component = components[index]@
+        <tr id="#component.id#">
+            <td>#component.id#</td>
+            <td>#component.name#</td>
+            <td>#component.desc#</td>
+            <td>
+                @for j = 0; j < context['projects'].length; j++@
+                @project = context['projects'][j]@
+                @if project.id == component.project@
+                #project.title#
+                @endif@
+                @endfor@
+            </td>
+        </tr>
+        @endfor@
+        </tbody>
+    </table>
+</div>
+<div class="content-footer">
+    <button value="listView" id="idShowListEntry" class="button needsSelection" disabled>Details</button>
+    <button value="listView" id="idEditEntry" class="button needsSelection" disabled>Bearbeiten</button>
+    <button value="listView" id="idDeleteEntry" class="button needsSelection" disabled>Löschen</button>
+    <button value="listView" id="idAddEntry">Neue Komponente erstellen</button>
+</div>
+<!--EOF-->

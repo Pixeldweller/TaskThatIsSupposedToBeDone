@@ -1,0 +1,50 @@
+<!--Template-Template-->
+<div class="content-head">
+    <h2>Fehlerübersicht</h2>
+    @let bug = context['bug']@
+    @console.log(context);@
+</div>
+<div class="content-body">
+    <p>
+        <strong>Fehlerbeschreibung</strong>: <br/>
+        #bug.startdesc#<br/>
+        <br/>
+        Erfassungsdatum: #bug.date#
+    </p>
+    <hr/>
+    <p>
+        Komponente:  <br/>
+        Kategorien:
+
+        @let index;@
+        @if bug.bug_category.length > 0@
+        @for index = 0; index < bug.bug_category.length; index++@
+        #bug.bug_category[index]#,
+        @endfor@
+        @endif@
+    </p>
+    <hr/>
+    <p>Status: #bug.type.toUpperCase()#<br/>
+        QS-Mitarbeiter: #context['employee'][bug.qsemployee].firstname#
+        #context['employee'][bug.qsemployee].lastname#
+    </p>
+
+
+    <hr/>
+    <h3>Lösung</h3>
+    <p>Datum: #bug.startdate#<br/>
+        Mitarbeiter: </p>
+    <hr/>
+    <p><strong>Beschreibung</strong>:<br/>
+        #bug.enddesc#</p>
+    <hr/>
+
+    <p>Kategorien:
+    </p>
+
+</div>
+<div class="content-footer" >
+
+
+</div>
+<!--EOF-->

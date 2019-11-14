@@ -1,0 +1,58 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+@console.log(context);@
+@var vlist = context['organizer'];@
+@console.log(vlist);@
+@var event = context['event'];@
+
+<div class="content-head">
+    @if event.id === -2@
+    <h2>Messe planen</h2>
+    @else@
+    <h2>Messedaten bearbeiten: #event.name#</h2>
+    @endif@
+</div>
+
+<!-- name, desc, startdate, enddate, organizerid -->
+
+<div class="content-body container dark" style="min-width: 350px; width: 50%; margin:auto; text-align: center;">
+    <form id="dataform" class="page" id="event-form" title="event" style="width: 65%; margin:auto; text-align: center;">
+        @if event.id === -2@
+        @else@
+        <input type="text" id="id" name="id" defaultValue="#event.id#" value="#event.id#" style="display:none;"/>
+        @endif@
+        <label for="name">Veranstaltungsname</label>
+        <input type="text" id="name" name="name" defaultValue="#event.name#" value="#event.name#"
+               placeholder="Messename" required/>
+        <label for="desc">Kategorien Tags</label>
+        <input type="text" id="desc" name="desc" defaultValue="#event.desc#" value="#event.desc#"
+               placeholder="##EventTags" required/>
+        <label for="startdate">Startdatum</label>
+        <input id="startdate" type="date" name="startdate" value="#event['startdate']#" required
+               style="background: transparent;">
+        <label for="enddate">Enddatum</label>
+        <input id="enddate" type="date" name="enddate" value="#event['enddate']#" required
+               style="background: transparent;">
+        <label style="margin: 10px;" for="organizerid">Veranstalter</label>
+        <select id="organizerid" name="organizerid" defaultValue="#event['organizerid']#">
+
+            @for index = 0; index < vlist.length; index++@
+            @singleEntry = vlist[index];@
+            @if event.organizerid === singleEntry.id@
+            <option value="#singleEntry.id#" selected>#singleEntry.name#</option>
+            @else@
+            <option value="#singleEntry.id#">#singleEntry.name#</option>
+            @endif@
+            @endfor@
+        </select>
+
+        <button id="idEdit" data-action="save" style="margin-top:20px;" onclick="this.style.display='none';">Weiter</button>
+        <button id="idBack" style="margin-top: 30px;">Zurück</button>
+    </form>
+</div>
+<div class="content-footer">
+    <section></section>
+</div>
+
+<!-- EOF -->

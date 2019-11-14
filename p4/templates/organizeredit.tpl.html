@@ -1,0 +1,33 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+@console.log(context);@
+@var event = context['organizer'];@
+
+<div class="content-head">
+    @if event.id === -1@
+    <h2>Messeveranstalter hinzufügen</h2>
+    @else@
+    <h2>Messeveranstalter bearbeiten: #event.name#</h2>
+    @endif@
+</div>
+
+<!-- name, desc, startdate, enddate, organizerid -->
+
+<div class="content-body container dark" style="min-width: 350px; width: 50%; margin:auto; text-align: center;">
+    <form id="dataform" class="page" id="event-form" title="organizer" style="width: 65%; margin:auto; text-align: center;">
+        @if event.id === -1@
+        @else@
+        <input type="text" id="id" name="id" defaultValue="#event.id#" value="#event.id#" style="display:none;"/>
+        @endif@
+        <label for="name">Ausstellername</label>
+        <input type="text" id="name" name="name" defaultValue="#event.name#" value="#event.name#" required/>
+        <label for="desc">Kurzbeschreibung</label>
+        <input type="text" id="desc" name="desc" defaultValue="#event.desc#" value="#event.desc#"
+               required/>
+        <button id="idEdit" data-action="save" style="margin-top: 30px;">Speichern</button>
+        <button id="idBack" style="margin-top: 30px;">Zurück</button>
+    </form>
+</div>
+
+<!-- EOF -->

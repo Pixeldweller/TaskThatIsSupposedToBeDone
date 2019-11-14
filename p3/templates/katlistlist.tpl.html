@@ -1,0 +1,50 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Auswertung Kategorien / Fehler </h2>
+</div>
+<div class="content-body">
+
+    @for loop = 0; loop < context['data'].length; loop++@
+    @let cat = context['data'][loop]@
+    <div id="cat-#loop#" class="container">
+        @if cat['childs'].length > 0@
+        <h3>#cat.category#</h3>
+        <table class="table-list current">
+            <thead class="table-head">
+            <tr>
+                <th> Status</th>
+                <th> Fehlerbeschreibung</th>
+                <th> Meldedatum</th>
+                <th> Behebungsdatum</th>
+                <th> Zeitdifferenz</th>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+            @for j = 0; j < cat['childs'].length; j++@
+            @entry = cat['childs'][j];@
+            <tr>
+                <td><span class="symbol symbol-#entry.type#"></span>#entry['type']#</td>
+                <td>#entry['desc']#</td>
+                <td>#entry['startdate']#</td>
+                <td>#entry['enddate']#</td>
+                <td>#entry['diff']#</td>
+            </tr>
+            @endfor@
+            </tbody>
+        </table>
+        @else@
+        <h3>#cat.category# <p>(keine Fehlermeldungen)</p></h3>
+        @endif@
+    </div>
+    @endfor@
+
+</div>
+<div class="content-footer">
+    <h4>
+        Diese Auswertung wurde am 15.01.19 erstellt.
+    </h4>
+</div>
+
+
+<!-- EOF -->

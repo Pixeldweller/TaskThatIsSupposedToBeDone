@@ -1,0 +1,144 @@
+<!--Template-Template-->
+@let categories = context['bug_category'];@
+@let cause = context['cause_category'];@
+@let employees = context['employee'];@
+@let projects = context['project'];@
+@let components = context['component'];@
+@let singleEntry;@
+@let secSingleEntry;@
+<div class="content-head">
+    <h2>Fehlerübersicht</h2>
+    @if APPUTIL.cookie_o.getCookie('role') === "qsmitarbeiter"@
+    <h3>Für Qualitätsicherung</h3>
+    @else@
+    <h3>Für Softwareentwickler</h3>
+    @endif@
+</div>
+<div class="content-body" style="margin-right: 0px;margin-left: 0px;">
+    <select id="switch" class="switch" onchange="APPUTIL.es_o.publish_px('app.cmd', ['fehler_type', this.value]);">
+        @if context['show'] == undefined@
+        <option value="-1" selected>Alle Fehler</option>
+        <option value="0">Erfasste Fehler</option>
+        <option value="1">Behobene Fehler</option>
+        @else@
+        @if context['show'] == 0@
+        <option value="-1">Alle Fehler</option>
+        <option value="0" selected>Erfasste Fehler</option>
+        <option value="1">Behobene Fehler</option>
+        @else@
+        <option value="-1">Alle Fehler</option>
+        <option value="0">Erfasste Fehler</option>
+        <option value="1" selected>Behobene Fehler</option>
+        @endif@
+        @endif@
+    </select>
+
+    <table id="list" class="table-list">
+        <thead class="table-head">
+        <tr>
+
+            <th class="clickable">Status</th>
+            <th class="clickable">Komponente</th>
+            <th>Fehlerbeschreibung</th>
+            <th>Fehler-Kategorien</th>
+            <th class="clickable">QS-Mitarbeiter</th>
+            <th class="clickable">Erfassungsdatum</th>
+            <th class="clickable">SW-Mitarbeiter</th>
+            <th class="clickable">Behebungsdatum</th>
+            <th>Ursachen-Kategorie</th>
+            <th>Behebungsbemerkung</th>
+        </tr>
+        </thead>
+        @let errors = context['data'];@
+        @console.log(context);@
+        @let index;@
+        @let secIndex;@
+        @let error;@
+        <tbody class="table-body">
+        @for index_row = 0; index_row < errors.length; index_row++@
+        @error = errors[index_row];@
+        <tr id="#error.id#" title="#error.type.toUpperCase()#">
+            <td><span class="symbol symbol-#error.type#"></span>#error.type.toUpperCase()#</td>
+            <td>
+
+                @for index_i = 0; index_i < components.length; index_i++@
+                @entry = components[index_i];@
+                @if entry.id == error.component@
+                #entry.name#
+                @for index_j = 0; index_j < projects.length; index_j++@
+                @entry = projects[index_j];@
+                @if entry.component.includes(error.component)@
+                <br>
+                <i style="text-align: center;"><small>[Projekt #entry.title#]</small></i>
+                @endif@
+                @endfor@
+                @endif@
+                @endfor@
+
+                @for index = 0; index < projects.length; index++@
+                @singleEntry = projects[index];@
+                @for secIndex = 0; secIndex < singleEntry.component.length; secIndex++@
+                @secSingleEntry = singleEntry.component[secIndex]@
+                @if secSingleEntry.id === error.component@
+                #components[secSingleEntry].name#
+                @endif@
+                @endfor@
+                @endfor@
+            </td>
+            <td>#error.startdesc#</td>
+            <td>
+                @for secIndex = 0; secIndex < error.bug_category.length; secIndex++@
+                #context['bug_category'][error.bug_category[secIndex]].title#
+                @endfor@
+            </td>
+            <td>
+                @for index = 0; index < employees.length; index++@
+                @singleEntry = employees[index];@
+                @if error.qsemployee === singleEntry.id@
+                #singleEntry.lastname#, #singleEntry.firstname#
+                @endif@
+                @endfor@
+            </td>
+            <td>#error.startdate#</td>
+            <td>
+                @if error['swemployee'] !== -1@
+                @for index = 0; index < employees.length; index++@
+                @singleEntry = employees[index];@
+                @if error.swemployee === singleEntry.id@
+                #singleEntry.lastname#, #singleEntry.firstname#
+                @endif@
+                @endfor@
+                @endif@
+            </td>
+            <td>#error.enddate#</td>
+            <td>
+                @if error['cause_category'] !== -1@
+                @for index = 0; index < cause.length; index++@
+                @singleEntry = cause[index];@
+                @if error.cause_category == singleEntry.id@
+                #singleEntry.title#
+                @endif@
+                @endfor@
+                @endif@
+            </td>
+            <td>#error.causedesc#</td>
+        </tr>
+        @endfor@
+        </tbody>
+
+    </table>
+</div>
+<div class="content-footer">
+    @if APPUTIL.cookie_o.getCookie('role') === "qsmitarbeiter"@
+    <button value="listView" id="idAddEntry">Neuen Fehler melden</button>
+    <button value="listView" id="idShowListEntry" class="button needsSelection" disabled>Details anzeigen</button>
+    <button value="listView" id="idEditEntry" class="button needsSelection needsErkannt" disabled>Software-Entwickler
+        zuweisen
+    </button>
+    <button value="listView" id="idPrüfung" class="button needsSelection needsBehoben" disabled>Fehler-Prüfung</button>
+    @else@
+    <button value="listView" id="idShowListEntry" class="button needsSelection" disabled>Details anzeigen</button>
+    <button value="listView" id="idEditEntry" class="button needsSelection needsErkannt" disabled>Lösung melden</button>
+    @endif@
+</div>
+<!--EOF-->

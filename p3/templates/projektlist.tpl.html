@@ -1,0 +1,40 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Projektübersicht</h2>
+</div>
+<div class="content-body">
+    <table id="list" class="table-list current">
+        <thead class="table-head">
+            <tr>
+                <th class="clickable"> ID</th>
+                <th class="clickable"> Titel</th>
+                <th class="clickable"> Beschreibung</th>
+                <th class="clickable"> Anzahl Komponenten</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+        @var entry;@
+        @var loop;@
+        @for loop = 0; loop < context.length; loop++@
+        @entry = context[loop];@
+            <tr id="#entry['id']#" class="selectable" tabindex="5+#entry['id']#">
+                <td>#entry['id']#</td>
+                <td>#entry['title']#</td>
+                <td>#entry['desc']#</td>
+                <td>#entry['component'].length#</td>
+            </tr>
+        @endfor@
+        </tbody>
+    </table>
+</div>
+<div class="content-footer">
+    <h4>
+        <button value="listView" id="idShowListEntry"  class="button needsSelection" disabled>Details</button>
+        <button value="listView" id="idEditEntry" class="button needsSelection" disabled>Bearbeiten</button>
+        <button value="listView" id="idDeleteEntry" class="button needsSelection" disabled>Löschen</button>
+        <button value="listView" id="idAddEntry">Neues Projekt erstellen</button>
+    </h4>
+</div>
+
+<!-- EOF -->

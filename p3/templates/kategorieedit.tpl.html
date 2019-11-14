@@ -1,0 +1,22 @@
+<!--Template-Template-->
+<div class="content-head">
+    @if context['id'] !== undefined@
+    <h2>Kategorie Bearbeiten (ID #context['id']#)</h2>
+    @else@
+    <h2>Neue Kategorie anlegen</h2>
+    @endif@
+</div>
+<div class="content-body">
+    <form id="dataform">
+        <input type="text" id="id" name="id" defaultValue="#context['id']#" value="#context['id']#" style="display:none;"/>
+        <label for="title">Neuer Kategoriename für #context.title#</label>
+        <input type="text" id="title" name="title" defaultValue="#context.title#" value="#context.title#" required/>
+    </form>
+</div>
+<div class="content-footer">
+    <h4>
+        <button id="idBack">Zurück</button>
+        <button id="idEdit">Übernehmen</button>
+    </h4>
+</div>
+<!--EOF-->

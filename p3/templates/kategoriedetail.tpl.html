@@ -1,0 +1,25 @@
+<!--Template-Template-->
+@var category = context@
+<div class="content-head">
+    <h2>Kategorieansicht</h2>
+</div>
+<div class="content-body">
+         @for index = 0; index < cause_cat.length; index++@
+            @category = cause_cat[index]@
+            <tr data-roleid="#category.id#" id="cause-#category.id#">
+                <td>#category.id#</td>
+                <td>#category.title#</td>
+            </tr>
+            @endfor@
+    <p>
+        Nummer: #category.id#<br/>
+        Name: #category.title#<br/>
+        Typ: #category.type#
+    </p>
+</div>
+<div class="content-footer" data-roleid="#category['roleid']#" data-id="#category['id']#">
+    <button id="idDetailBack">Zurück</button>
+    <button id="idDetailEdit">Bearbeiten</button>
+    <button id="idDelete">Löschen</button>
+</div>
+<!--EOF-->

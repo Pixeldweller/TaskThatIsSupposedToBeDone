@@ -1,0 +1,34 @@
+<!--Template-Template-->
+<div class="content-head">
+    <h2>Komponentenübersicht: #context.name#</h2>
+    @let component = context;@
+</div>
+<div class="content-body">
+    <form id="dataform">
+        <input type="text" id="id" name="id" defaultValue="#component['id']#" value="#component['id']#"
+               style="display:none;" disabled/>
+        <label>Name</label>
+        <input type="text" id="name" name="name" defaultValue="#component['name']#" value="#component['name']#"
+               disabled/>
+        <label for="desc">Beschreibung</label>
+        <textarea id="desc" name="desc" defaultValue="#component.desc#" disabled>#component.desc#</textarea>
+        <label for="projects">Zugeordnet zu Projekt: </label>
+        <select id="projects" name="projects" defaultValue=#component.project# disabled>
+            @let index;@
+            @for index = 0; index < context['projects'].length; index++@
+            @let project = context['projects'][index];@
+            @if component.project == project.id@
+            <option value="#project.id#" selected>#project.title#</option>
+            @else@
+            <option value="#project.id#">#project.title#</option>
+            @endif@
+            @endfor@
+        </select>
+    </form>
+</div>
+<div class="content-footer" data-id="#context.id#">
+    <button id="idDetailBack">Zurück</button>
+    <button id="idDetailEdit">Bearbeiten</button>
+    <button id="idDelete">Löschen</button>
+</div>
+<!--EOF-->

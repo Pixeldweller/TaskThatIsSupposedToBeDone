@@ -1,0 +1,58 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="content-head">
+    <h2>Ausstellerübersicht</h2>
+</div>
+<div class="content-body">
+
+
+    <h3>Suchfilter</h3>
+    <div class="">
+        <input type="text" id="myInput" onkeyup="APPUTIL.util_o.hideTableRowsNotContaining(this.value)"
+               onload="APPUTIL.util_o.hideTableRowsNotContaining(this.value)"
+               placeholder="Volltextsuche" value="#APPUTIL.cookie_o.getCookie('auser')#">
+    </div>
+    <h3>Ergebnisse</h3>
+    <div class="container">
+        <table id='searchtable' class="table-list current">
+            <thead class="table-head">
+            <tr>
+                <th class="clickable"> Buchungs-ID</th>
+                <th class="clickable"> Messe</th>
+                <th class="clickable"> Zeitraum</th>
+                <th class="clickable"> Standposition</th>
+                <th class="clickable"> Standbeschreibung</th>
+                <th class="clickable"> Aussteller</th>
+            </tr>
+            </thead>
+            <tbody class="table-body">
+
+            @console.log(context);@
+            @let marks = ['A','B','C','D','E','F','G','H','I','J','K']@
+            @for loop = 0; loop < context['bookings'].length; loop++@
+            @let entry = context['bookings'][loop]@
+
+            <tr title="#entry.eventid#" id="#entry.desc#">
+                <td>#entry.id#</td>
+                <td>#APPUTIL.util_o.getBookingEntryTargetValue(context['events'],'id',entry.eventid,'name')#</td>
+                <td>
+                    #APPUTIL.util_o.getBookingEntryTargetValue(context['events'],'id',entry.eventid,'startdate')#-#APPUTIL.util_o.getBookingEntryTargetValue(context['events'],'id',entry.eventid,'enddate')#
+                </td>
+                <td>#marks[entry.y]##entry.x#</td>
+                <td>#entry.desc#</td>
+                <td>#APPUTIL.util_o.getBookingEntryTargetValue(context['exhibitors'],'id',entry.exhibitorid,'name')#
+                </td>
+            </tr>
+            @endfor@
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<div class="content-footer">
+    <section></section>
+</div>
+
+
+<!-- EOF -->
